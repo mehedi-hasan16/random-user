@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random User</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+        }
+        main img{
+            border-radius: 50%;
+        }
+        button{
+            background-color: tomato;
+            color: white;
+            padding: 7px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        header h1{
+            color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Random User</h1>
+    </header>
+    <main>
+        <img src="" alt="profile-image" id="profile-pic">
+        <p>Name: <span id="name"></span></p>
+        <p>Gender: <span id="gender"></span></p>
+        <button onclick="loadData()">Refresh</button>
+    </main>
+    
+
+    <script>
+        const url = 'https://randomuser.me/api/';
+
+        function loadData(){
+            fetch(url)
+            .then(res=>res.json())
+            .then(data=> displayData(data))
+        }
+
+
+        function displayData(data){
+
+            const name = data.results[0].name.title +' '+data.results[0].name.first +' '+data.results[0].name.last;
+            const gender= data.results[0].gender;
+            const picture = data.results[0].picture.medium
+;
+
+
+            document.getElementById('name').innerText=name;
+            document.getElementById('gender').innerText=gender;
+            document.getElementById('profile-pic').src=picture;
+
+
+        }
+
+
+        
+    </script>
+</body>
+</html>
